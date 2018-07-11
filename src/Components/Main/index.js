@@ -18,9 +18,19 @@ class Main extends Component {
 
     this.state = {
       isAuthenticated: false,
-      open: false
+      open: false,
+      users: []
     };
   }
+
+  createNewUser = (newUser) => {
+    const { users } = this.state;
+    const NewUsersList = [...users, newUser];
+
+    this.setState({
+      users: NewUsersList
+    }, ()=> console.log(this.state.users));
+  };
 
   logInClickOpen = () => {
     this.setState({ open: true });
@@ -75,6 +85,7 @@ class Main extends Component {
                   onLogInDialogClose={this.LogInDialogClose}
                   onLogIn={this.onLogIn}
                   onLogOut={this.onLogOut}
+                  createNewUser={this.createNewUser}
                 />
               )}
             />

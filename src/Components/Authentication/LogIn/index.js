@@ -14,11 +14,34 @@ import {
 class LogIn extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      username: '',
+      password: ''
+    }
   }
 
+  static userID = 0;
+
   loginProcess = () => {
-    this.props.onRedirect();
-    this.props.onLogIn();
+    const { username, password } = this.state;
+    const { onRedirect, onLogIn, createNewUser } = this.props;
+
+    createNewUser({userID: LogIn.userID++, username, password});
+    onRedirect();
+    onLogIn();
+  };
+
+  onUsernameChange = (e) => {
+    this.setState({
+      username: e.target.value
+    });
+  };
+
+  onPasswordChange = (e) => {
+    this.setState({
+      password: e.target.value
+    });
   };
 
   render() {
@@ -37,8 +60,9 @@ class LogIn extends Component {
               margin="dense"
               id="name"
               label="Username"
-              type="email"
+              type="text"
               fullWidth
+              onChange={this.onUsernameChange}
             />
             <TextField
               margin="dense"
@@ -46,6 +70,7 @@ class LogIn extends Component {
               label="Password"
               type="password"
               fullWidth
+              onChange={this.onPasswordChange}
             />
           </DialogContent>
           <DialogActions>

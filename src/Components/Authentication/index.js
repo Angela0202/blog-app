@@ -23,7 +23,13 @@ class Authentication extends Component {
   };
 
   render() {
-    const { isOpen, onLogInDialogClose, onLogIn, onLogOut, isAuthenticated } = this.props;
+    const {
+      isOpen,
+      onLogInDialogClose,
+      onLogIn,
+      onLogOut,
+      isAuthenticated,
+      createNewUser } = this.props;
     const { from } = this.props.location.state || { from: { pathname: "/" } };
     const { redirectToReferrer } = this.state;
 
@@ -37,6 +43,7 @@ class Authentication extends Component {
         onLogInDialogClose={onLogInDialogClose}
         onLogIn={onLogIn}
         onRedirect={this.onRedirect}
+        createNewUser={createNewUser}
       />
     ) : (
       <LogOut
