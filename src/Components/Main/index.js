@@ -2,10 +2,15 @@ import React, { Component } from 'react';
 
 import Navigation from '../Navigation';
 import Authentication from '../Authentication';
+import CreateNewPost from '../CreateNewPost';
 import styles from './styles';
 import { withStyles } from '@material-ui/core/styles';
-import { Button } from '@material-ui/core/';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from 'react-router-dom';
+import PrivateRoute from '../../utils/privateRoute';
 
 class Main extends Component {
   constructor(props) {
@@ -14,7 +19,7 @@ class Main extends Component {
     this.state = {
       isAuthenticated: false,
       open: false
-    }
+    };
   }
 
   logInClickOpen = () => {
@@ -27,15 +32,18 @@ class Main extends Component {
 
   onLogIn = () => {
     this.setState({
-      isAuthenticated: true,
-    })
+      isAuthenticated: true
+    });
   };
 
   onLogOut = () => {
-    this.setState({
-      isAuthenticated: false,
-      open: false
-    }, () => console.log(this.state.isAuthenticated))
+    this.setState(
+      {
+        isAuthenticated: false,
+        open: false
+      },
+      () => console.log(this.state.isAuthenticated)
+    );
   };
 
   render() {
@@ -52,32 +60,14 @@ class Main extends Component {
           />
           <Switch>
             <Route exact path="/" render={() => <h1>Posts</h1>} />
-            <Route
+            <PrivateRoute
               path="/create"
-              render={() => (
-                <h1>
-                  Create Post
-                  <div className={classes.div}>
-                    <Button component={Link} to="/blog/post">
-                      button
-                    </Button>
-                  </div>
-                  <div className={classes.div}>
-                    <Button component={Link} to="/blog/post">
-                      button
-                    </Button>
-                  </div>
-                  <div className={classes.div}>
-                    <Button component={Link} to="/blog/post">
-                      button
-                    </Button>
-                  </div>
-                </h1>
-              )}
+              component={CreateNewPost}
+              isAuthenticated={isAuthenticated}
             />
             <Route
               to="/login"
-              render={props=>
+              render={props => (
                 <Authentication
                   {...props}
                   isOpen={open}
@@ -86,7 +76,8 @@ class Main extends Component {
                   onLogIn={this.onLogIn}
                   onLogOut={this.onLogOut}
                 />
-              }/>
+              )}
+            />
           </Switch>
         </div>
       </Router>

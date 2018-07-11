@@ -20,7 +20,12 @@ class Navigation extends Component {
               <Button className={classes.button}>All Posts</Button>
             </Link>
             <Link to="/create">
-              <Button className={classes.button}>Create Post</Button>
+              <Button
+                className={classes.button}
+                onClick={isAuthenticated ? () => {} : logInClickOpen}
+              >
+                Create Post
+              </Button>
             </Link>
             <Link to="/login">
               {
