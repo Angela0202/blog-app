@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import Navigation from '../Navigation';
+import Authentication from '../Authentication';
 import styles from './styles';
 import { withStyles } from '@material-ui/core/styles';
 import { Button } from '@material-ui/core/';
@@ -11,18 +12,30 @@ class Main extends Component {
     super(props);
 
     this.state = {
-      isAuthenticated: false
+      isAuthenticated: false,
+      open: false
     }
   }
 
+  logInClickOpen = () => {
+    this.setState({ open: true });
+  };
+
+  LogInDialogClose = () => {
+    this.setState({ open: false });
+  };
+
   render() {
     const { classes } = this.props;
-    const { isAuthenticated } = this.state;
+    const { isAuthenticated, open } = this.state;
 
     return (
       <Router>
         <div>
-          <Navigation isAuthenticated={isAuthenticated}/>
+          <Navigation
+            isAuthenticated={isAuthenticated}
+            logInClickOpen={this.logInClickOpen}
+          />
           <Switch>
             <Route exact path="/" render={() => <h1>Posts</h1>} />
             <Route
@@ -48,6 +61,16 @@ class Main extends Component {
                 </h1>
               )}
             />
+            <Route
+              to="/login"
+              render={props=>
+                <Authentication
+                  {...props}
+                  isOpen={open}
+                  isAuthenticated={isAuthenticated}
+                  onLogInDialogClose={this.LogInDialogClose}
+                />
+              }/>
           </Switch>
         </div>
       </Router>

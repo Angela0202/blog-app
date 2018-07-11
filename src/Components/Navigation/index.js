@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 class Navigation extends Component {
   render() {
-    const { classes, isAuthenticated } = this.props;
+    const { classes, isAuthenticated, logInClickOpen } = this.props;
 
     return (
       <AppBar color={'default'}>
@@ -24,8 +24,11 @@ class Navigation extends Component {
             </Link>
             <Link to="/login">
               {
-                isAuthenticated ? (
-                  <Button className={classes.button}>Log In</Button>
+                !isAuthenticated ? (
+                  <Button
+                    className={classes.button}
+                    onClick={logInClickOpen}
+                  >Log In</Button>
                 ) : (
                   <Button className={classes.button}>Log Out</Button>
                 )
