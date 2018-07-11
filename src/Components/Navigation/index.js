@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 class Navigation extends Component {
   render() {
-    const { classes } = this.props;
+    const { classes, isAuthenticated } = this.props;
 
     return (
       <AppBar color={'default'}>
@@ -21,6 +21,15 @@ class Navigation extends Component {
             </Link>
             <Link to="/create">
               <Button className={classes.button}>Create Post</Button>
+            </Link>
+            <Link to="/login">
+              {
+                isAuthenticated ? (
+                  <Button className={classes.button}>Log In</Button>
+                ) : (
+                  <Button className={classes.button}>Log Out</Button>
+                )
+              }
             </Link>
           </div>
         </Toolbar>

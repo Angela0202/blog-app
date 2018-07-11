@@ -7,13 +7,22 @@ import { Button } from '@material-ui/core/';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 
 class Main extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      isAuthenticated: false
+    }
+  }
+
   render() {
     const { classes } = this.props;
+    const { isAuthenticated } = this.state;
 
     return (
       <Router>
         <div>
-          <Navigation />
+          <Navigation isAuthenticated={isAuthenticated}/>
           <Switch>
             <Route exact path="/" render={() => <h1>Posts</h1>} />
             <Route
