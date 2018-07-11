@@ -7,6 +7,8 @@ import styles from './styles';
 import { withStyles } from '@material-ui/core/styles';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import PrivateRoute from '../../utils/privateRoute';
+import AllPosts from '../AllPosts';
+import SinglePost from '../SinglePost';
 
 class Main extends Component {
   constructor(props) {
@@ -48,13 +50,10 @@ class Main extends Component {
   };
 
   onLogOut = () => {
-    this.setState(
-      {
-        isAuthenticated: false,
-        open: false
-      },
-      () => console.log(this.state.isAuthenticated)
-    );
+    this.setState({
+      isAuthenticated: false,
+      open: false
+    });
   };
 
   render() {
@@ -69,29 +68,32 @@ class Main extends Component {
             logInClickOpen={this.logInClickOpen}
             onLogOut={this.onLogOut}
           />
-          <Switch>
-            <Route exact path="/" render={() => <h1>Posts</h1>} />
-            <PrivateRoute
-              path="/create"
-              component={CreateNewPost}
-              isAuthenticated={isAuthenticated}
-              currentUser={currentUser}
-            />
-            <Route
-              to="/login"
-              render={props => (
-                <Authentication
-                  {...props}
-                  isOpen={open}
-                  isAuthenticated={isAuthenticated}
-                  onLogInDialogClose={this.LogInDialogClose}
-                  onLogIn={this.onLogIn}
-                  onLogOut={this.onLogOut}
-                  createNewUser={this.createNewUser}
-                />
-              )}
-            />
-          </Switch>
+          <div className={classes.container}>
+            <Switch>
+              <Route exact path="/" render={() => <AllPosts />} />
+              <PrivateRoute
+                path="/create"
+                component={CreateNewPost}
+                isAuthenticated={isAuthenticated}
+                currentUser={currentUser}
+              />
+              <Route path="/post/:id" component={SinglePost} />
+              <Route
+                to="/login"
+                render={props => (
+                  <Authentication
+                    {...props}
+                    isOpen={open}
+                    isAuthenticated={isAuthenticated}
+                    onLogInDialogClose={this.LogInDialogClose}
+                    onLogIn={this.onLogIn}
+                    onLogOut={this.onLogOut}
+                    createNewUser={this.createNewUser}
+                  />
+                )}
+              />
+            </Switch>
+          </div>
         </div>
       </Router>
     );
