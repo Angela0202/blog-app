@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 class Navigation extends Component {
   render() {
-    const { classes, isAuthenticated, logInClickOpen } = this.props;
+    const { classes, isAuthenticated, logInClickOpen, onLogOut } = this.props;
 
     return (
       <AppBar color={'default'}>
@@ -30,7 +30,10 @@ class Navigation extends Component {
                     onClick={logInClickOpen}
                   >Log In</Button>
                 ) : (
-                  <Button className={classes.button}>Log Out</Button>
+                  <Button
+                    className={classes.button}
+                    onClick={logInClickOpen}
+                  >Log Out</Button>
                 )
               }
             </Link>

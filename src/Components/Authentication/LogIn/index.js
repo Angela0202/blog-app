@@ -8,12 +8,18 @@ import {
   DialogTitle,
   DialogContent,
   DialogActions,
-  TextField } from '@material-ui/core/';
+  TextField,
+} from '@material-ui/core/';
 
 class LogIn extends Component {
   constructor(props) {
     super(props);
   }
+
+  loginProcess = () => {
+    this.props.onRedirect();
+    this.props.onLogIn();
+  };
 
   render() {
     const {isOpen, onLogInDialogClose} = this.props;
@@ -46,7 +52,7 @@ class LogIn extends Component {
             <Button onClick={onLogInDialogClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={onLogInDialogClose} color="primary">
+            <Button onClick={this.loginProcess} color="primary">
               Log In
             </Button>
           </DialogActions>

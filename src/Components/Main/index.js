@@ -25,6 +25,19 @@ class Main extends Component {
     this.setState({ open: false });
   };
 
+  onLogIn = () => {
+    this.setState({
+      isAuthenticated: true,
+    })
+  };
+
+  onLogOut = () => {
+    this.setState({
+      isAuthenticated: false,
+      open: false
+    }, () => console.log(this.state.isAuthenticated))
+  };
+
   render() {
     const { classes } = this.props;
     const { isAuthenticated, open } = this.state;
@@ -35,6 +48,7 @@ class Main extends Component {
           <Navigation
             isAuthenticated={isAuthenticated}
             logInClickOpen={this.logInClickOpen}
+            onLogOut={this.onLogOut}
           />
           <Switch>
             <Route exact path="/" render={() => <h1>Posts</h1>} />
@@ -69,6 +83,8 @@ class Main extends Component {
                   isOpen={open}
                   isAuthenticated={isAuthenticated}
                   onLogInDialogClose={this.LogInDialogClose}
+                  onLogIn={this.onLogIn}
+                  onLogOut={this.onLogOut}
                 />
               }/>
           </Switch>
