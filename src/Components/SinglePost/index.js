@@ -12,15 +12,36 @@ import {
   CardActions
 } from '@material-ui/core/';
 import FavoriteIcon from '@material-ui/icons/Favorite';
+import CommentList from '../CommentList';
+import CreateComment from '../CreateComment';
 
 class SinglePost extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      clicked: 0
+      clicked: 0,
+/*      comments: {
+        userID: '',
+        postID: '',
+        title: '',
+        body: ''
+      },*/
+      comments: []
     };
   }
+
+  onCommentCreate = (comment) => {
+    const { comments } = this.state;
+
+    const postID = SinglePost.getSinglePostID(),
+      post = SinglePost.getSingleItemFromLocalStorage(postID),
+      postInJsonFormat = JSON.parse(post);
+
+    this.setState({
+      comments: [{postID: postID, userID: postInJsonFormat.authorID, ...comment}, ...comments]
+    }, () => console.log(this.state.comments));
+  };
 
   static getSinglePostID() {
     const path = window.location.pathname,
@@ -45,6 +66,7 @@ class SinglePost extends Component {
       postInJsonFormat = JSON.parse(post);
 
     const { classes } = this.props;
+    const { comments } = this.state;
 
     return (
       <div>
@@ -65,6 +87,8 @@ class SinglePost extends Component {
               <span>{this.state.clicked}</span>
             </Button>
           </CardActions>
+          <CommentList comments={comments}/>
+          <CreateComment onCommentCreate={this.onCommentCreate}/>
         </Card>
       </div>
     );
