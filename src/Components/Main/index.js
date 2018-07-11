@@ -5,11 +5,7 @@ import Authentication from '../Authentication';
 import CreateNewPost from '../CreateNewPost';
 import styles from './styles';
 import { withStyles } from '@material-ui/core/styles';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import PrivateRoute from '../../utils/privateRoute';
 
 class Main extends Component {
@@ -19,17 +15,22 @@ class Main extends Component {
     this.state = {
       isAuthenticated: false,
       open: false,
-      users: []
+      users: [],
+      currentUser: ''
     };
   }
 
-  createNewUser = (newUser) => {
+  createNewUser = newUser => {
     const { users } = this.state;
     const NewUsersList = [...users, newUser];
 
-    this.setState({
-      users: NewUsersList
-    }, ()=> console.log(this.state.users));
+    this.setState(
+      {
+        users: NewUsersList,
+        currentUser: newUser
+      },
+      () => console.log(this.state.users)
+    );
   };
 
   logInClickOpen = () => {
@@ -58,7 +59,7 @@ class Main extends Component {
 
   render() {
     const { classes } = this.props;
-    const { isAuthenticated, open } = this.state;
+    const { isAuthenticated, open, currentUser } = this.state;
 
     return (
       <Router>
@@ -74,6 +75,7 @@ class Main extends Component {
               path="/create"
               component={CreateNewPost}
               isAuthenticated={isAuthenticated}
+              currentUser={currentUser}
             />
             <Route
               to="/login"
