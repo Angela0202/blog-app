@@ -9,6 +9,7 @@ export default {
   },
 
   card: {
-    marginTop: '70px'
+    marginTop: '70px',
+    maxWidth: '900px'
   }
 }
