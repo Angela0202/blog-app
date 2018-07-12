@@ -17,7 +17,7 @@ class CreateNewPost extends Component {
         authorID: this.props.currentUser.userID,
         authorName: this.props.currentUser.username,
         date: this.getDate(),
-        comments: {}
+        comments: []
       },
 
       redirect: false

@@ -36,7 +36,7 @@ class SinglePost extends Component {
       comments: [{...comment}, ...comments]
     });
 
-    postInJsonFormat.comments = [comment, ...comments];
+    postInJsonFormat.comments = postInJsonFormat.comments.concat([comment, ...comments]);
 
     localStorage.setItem(postInJsonFormat.postID, JSON.stringify({...postInJsonFormat}));
   };
