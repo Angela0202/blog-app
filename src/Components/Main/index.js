@@ -77,7 +77,12 @@ class Main extends Component {
                 isAuthenticated={isAuthenticated}
                 currentUser={currentUser}
               />
-              <Route path="/post/:id" component={SinglePost} />
+              <Route path="/post/:id" render={props => (
+                <SinglePost
+                  {...props}
+                  isAuthenticated={isAuthenticated}
+                />
+              )} />
               <Route
                 to="/login"
                 render={props => (
