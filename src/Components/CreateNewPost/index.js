@@ -5,8 +5,6 @@ import { withStyles } from '@material-ui/core/styles';
 import { TextField, Button } from '@material-ui/core/';
 import SaveIcon from '@material-ui/icons/Save';
 
-import { Redirect } from 'react-router-dom';
-
 class CreateNewPost extends Component {
   constructor(props) {
     super(props);
@@ -18,7 +16,8 @@ class CreateNewPost extends Component {
         image: '',
         authorID: this.props.currentUser.userID,
         authorName: this.props.currentUser.username,
-        date: this.getDate()
+        date: this.getDate(),
+        comments: {}
       },
 
       redirect: false
@@ -57,7 +56,6 @@ class CreateNewPost extends Component {
 
   onClick = () => {
     const { title, body } = this.state.post;
-    console.log(CreateNewPost.ID);
 
     if (title.trim() !== '' && body.trim() !== '') {
       const post = { ...this.state.post, postID: ++CreateNewPost.ID };
@@ -87,8 +85,7 @@ class CreateNewPost extends Component {
 
   render() {
     const { classes } = this.props;
-    const { title, body, image, authorID } = this.state.post;
-    console.log(authorID);
+    const { title, body, image } = this.state.post;
     return (
       <div className={classes.container}>
         <h1> Add New Post </h1>
