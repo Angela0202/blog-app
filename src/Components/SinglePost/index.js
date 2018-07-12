@@ -94,7 +94,7 @@ class SinglePost extends Component {
       post = SinglePost.getSingleItemFromLocalStorage(postID),
       postInJsonFormat = JSON.parse(post);
 
-    const { classes } = this.props;
+    const { classes, isAuthenticated } = this.props;
     const { isEditing, value } = this.state;
 
     return (
@@ -134,6 +134,7 @@ class SinglePost extends Component {
               color="secondary"
               className={classes.button}
               onClick={this.onEditOrSaveButtonClick}
+              disabled={!isAuthenticated}
             >
               {!isEditing ? (<EditIcon />) : (<SaveIcon />)}
             </Button>
