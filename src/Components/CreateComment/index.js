@@ -31,7 +31,7 @@ class CreateComment extends Component {
         comment: '',
         title: ''
       }, () => console.log(this.state.comment));
-      onCommentCreate({ body: trimmedValue, title });
+      onCommentCreate({ commentBody: trimmedValue, commentTitle: title });
     }
   };
 
