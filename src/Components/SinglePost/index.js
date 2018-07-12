@@ -80,6 +80,17 @@ class SinglePost extends Component {
       this.setState({
         isEditing: false,
         value: this.state.value
+      }, () => {
+        const postID = SinglePost.getSinglePostID(),
+          post = SinglePost.getSingleItemFromLocalStorage(postID),
+          postInJsonFormat = JSON.parse(post);
+
+        postInJsonFormat.body = this.state.value;
+
+        localStorage.setItem(
+          postInJsonFormat.postID,
+          JSON.stringify({ ...postInJsonFormat })
+        );
       });
   };
 
