@@ -62,7 +62,7 @@ class Main extends Component {
 
     return (
       <Router>
-        <div>
+        <div className={classes.root}>
           <Navigation
             isAuthenticated={isAuthenticated}
             logInClickOpen={this.logInClickOpen}

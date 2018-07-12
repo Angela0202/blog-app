@@ -1,5 +1,17 @@
 export default {
   container: {
-    padding: '30px 60px'
+    marginTop: '73px'
+  },
+
+  root: {
+    overflowX: 'hidden',
+    justifyContent: 'center',
+    display: 'flex',
+    width: '100vw',
+    height: '100vh'
+  },
+
+  color: {
+    backgroundColor: '#'
   }
 }

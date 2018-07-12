@@ -12,14 +12,15 @@ import {
 
 class CommentList extends Component {
   render() {
-    const { comments } = this.props;
+    const { comments, classes } = this.props;
 
     return (
-      <Grid container spacing={16}>
+      <Grid container spacing={16} className={classes.container}>
+        <h3>Comments</h3>
         {
           comments.map((comment, index) => (
-            <Grid item xs={12} md={6} key={index}>
-              <Typography variant="title">{comment.title}</Typography>
+            <Grid item xs={12} md={12} lg={12} key={index} className={classes.grid}>
+              <Typography variant="title">{comment.commentTitle}</Typography>
               <div>
                 <List>
                   <ListItem>

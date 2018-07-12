@@ -10,7 +10,7 @@ class Navigation extends Component {
     const { classes, isAuthenticated, logInClickOpen, onLogOut } = this.props;
 
     return (
-      <AppBar color={'default'}>
+      <AppBar className={classes.color}>
         <Toolbar className={classes.toolbar}>
           <Typography variant="title" color="inherit">
             React Blog App

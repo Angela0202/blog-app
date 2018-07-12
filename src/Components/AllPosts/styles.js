@@ -1,20 +1,33 @@
 export default {
   card: {
-    maxWidth: '400px',
-    margin: '20px',
+    width: '32%',
+    height: '220px',
+    margin: '7px',
+    minWidth: '150px',
+    maxWidth: '364px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
 
     '&:hover': {
       backgroundColor: '#57c9c4',
-      transition: '.5s',
+      transition: '.9s',
       color: '#fff'
     }
   },
 
   container: {
-    width: '100vw',
     display: 'flex',
-    justifyContent: 'center',
-    padding: '30px 60px',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    padding: '20px'
+  },
+
+  actions: {
+    display: 'flex',
+    justifyContent: 'end'
+  },
+
+  postBody: {
+    fontSize: '16px'
   }
 }
