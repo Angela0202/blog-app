@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 class Navigation extends Component {
   render() {
-    const { classes, isAuthenticated, logInClickOpen, onLogOut } = this.props;
+    const { classes, isAuthenticated, logInClickOpen } = this.props;
 
     return (
       <AppBar className={classes.color}>
