@@ -38,22 +38,18 @@ class SinglePost extends Component {
   onCommentCreate = comment => {
     const { comments } = this.state;
 
-    const postID = SinglePost.getSinglePostID(),
-      post = SinglePost.getSingleItemFromLocalStorage(postID),
-      postInJsonFormat = JSON.parse(post);
-
     this.setState({
       comments: [{ ...comment }, ...comments]
     });
 
-    postInJsonFormat.comments = postInJsonFormat.comments.concat([
+    this.post.comments = this.post.comments.concat([
       comment,
       ...comments
     ]);
 
     localStorage.setItem(
-      postInJsonFormat.postID,
-      JSON.stringify({ ...postInJsonFormat })
+      this.post.postID,
+      JSON.stringify({ ...this.post })
     );
   };
 
@@ -62,10 +58,6 @@ class SinglePost extends Component {
       splittedPath = path.split('/');
 
     return splittedPath[splittedPath.length - 1].slice(-1);
-  }
-
-  static getSingleItemFromLocalStorage(id) {
-    return localStorage.getItem(id);
   }
 
   onClick = () => {
