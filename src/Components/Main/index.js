@@ -42,7 +42,7 @@ class Main extends Component {
     const { posts } = this.state;
 
     this.setState({
-      posts: [...posts, post]
+      posts: [post, ...posts]
     });
   };
 
@@ -106,7 +106,10 @@ class Main extends Component {
               <Route
                 path="/post/:id"
                 render={props => (
-                  <SinglePost {...props} isAuthenticated={isAuthenticated} />
+                  <SinglePost {...props}
+                  isAuthenticated={isAuthenticated}
+                  posts={posts}
+                  />
                 )}
               />
               <Route

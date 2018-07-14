@@ -22,11 +22,14 @@ class SinglePost extends Component {
   constructor(props) {
     super(props);
 
+    const posts = this.props.posts;
+    const post = posts.filter(post => post.postID === +SinglePost.getSinglePostID())[0];
+
     this.state = {
       clicked: 0,
       comments: [],
       isEditing: false,
-      value: JSON.parse(SinglePost.getSingleItemFromLocalStorage(SinglePost.getSinglePostID())).body
+      value: post.body
     }
   }
 
