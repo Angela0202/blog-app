@@ -23,15 +23,17 @@ class SinglePost extends Component {
     super(props);
 
     const posts = this.props.posts;
-    const post = posts.filter(post => post.postID === +SinglePost.getSinglePostID())[0];
+    this.post = SinglePost.findPostById(posts);
 
     this.state = {
       clicked: 0,
       comments: [],
       isEditing: false,
-      value: post.body
+      value: this.post.body
     }
   }
+
+  static findPostById = (posts) => posts.filter(post => post.postID === +SinglePost.getSinglePostID())[0];
 
   onCommentCreate = comment => {
     const { comments } = this.state;
@@ -84,15 +86,11 @@ class SinglePost extends Component {
         isEditing: false,
         value: this.state.value
       }, () => {
-        const postID = SinglePost.getSinglePostID(),
-          post = SinglePost.getSingleItemFromLocalStorage(postID),
-          postInJsonFormat = JSON.parse(post);
-
-        postInJsonFormat.body = this.state.value;
+        this.post.body = this.state.value;
 
         localStorage.setItem(
-          postInJsonFormat.postID,
-          JSON.stringify({ ...postInJsonFormat })
+          this.post.postID,
+          JSON.stringify({ ...this.post })
         );
       });
   };
@@ -104,10 +102,6 @@ class SinglePost extends Component {
   };
 
   render() {
-    const postID = SinglePost.getSinglePostID(),
-      post = SinglePost.getSingleItemFromLocalStorage(postID),
-      postInJsonFormat = JSON.parse(post);
-
     const { classes, isAuthenticated } = this.props;
     const { isEditing, value } = this.state;
 
@@ -115,12 +109,12 @@ class SinglePost extends Component {
       <div>
         <Card className={classes.card}>
           <CardHeader
-            title={postInJsonFormat.title}
-            subheader={`created by ${postInJsonFormat.authorName} on ${
-              postInJsonFormat.date
+            title={this.post.title}
+            subheader={`created by ${this.post.authorName} on ${
+              this.post.date
             }`}
           />
-          <CardMedia className={classes.media} image={postInJsonFormat.image} />
+          <CardMedia className={classes.media} image={this.post.image} />
           <CardContent>
             {!isEditing ? (
               <Typography component="p">{value}</Typography>
@@ -153,7 +147,7 @@ class SinglePost extends Component {
               {!isEditing ? (<EditIcon />) : (<SaveIcon />)}
             </Button>
           </CardActions>
-          <CommentList comments={postInJsonFormat.comments} />
+          <CommentList comments={this.post.comments} />
           <CreateComment onCommentCreate={this.onCommentCreate} />
         </Card>
       </div>
