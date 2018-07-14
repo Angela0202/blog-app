@@ -56,6 +56,7 @@ class CreateNewPost extends Component {
 
   onClick = () => {
     const { title, body } = this.state.post;
+    const { onPostCreate } = this.props;
 
     if (title.trim() !== '' && body.trim() !== '') {
       const post = { ...this.state.post, postID: ++CreateNewPost.ID };
@@ -72,14 +73,9 @@ class CreateNewPost extends Component {
             date: this.getDate()
           },
           redirect: true
-        }/*,
-        () => {
-          if (this.state.redirect) {
-            window.location.href = '/';
-            /!*return <Redirect to="/" />*!/
-          }
-        }*/
-      );
+        });
+
+      onPostCreate(post);
     }
   };
 
