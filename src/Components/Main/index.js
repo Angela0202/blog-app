@@ -14,12 +14,28 @@ class Main extends Component {
   constructor(props) {
     super(props);
 
+    const posts = Main.readFromLocalStorage();
+
     this.state = {
       isAuthenticated: false,
       open: false,
       users: [],
-      currentUser: ''
+      currentUser: '',
+      posts: [...posts]
     };
+  }
+
+  static readFromLocalStorage() {
+    const values = [],
+      keys = Object.keys(localStorage);
+    let i = 0;
+
+    while (i < keys.length) {
+      values.push(JSON.parse(localStorage.getItem(keys[i])));
+      i++;
+    }
+
+    return values;
   }
 
   createNewUser = newUser => {
@@ -30,9 +46,7 @@ class Main extends Component {
       {
         users: NewUsersList,
         currentUser: newUser
-      },
-      () => console.log(this.state.users)
-    );
+      });
   };
 
   logInClickOpen = () => {
@@ -58,7 +72,7 @@ class Main extends Component {
 
   render() {
     const { classes } = this.props;
-    const { isAuthenticated, open, currentUser } = this.state;
+    const { isAuthenticated, open, currentUser, posts } = this.state;
 
     return (
       <Router>
@@ -70,7 +84,10 @@ class Main extends Component {
           />
           <div className={classes.container}>
             <Switch>
-              <Route exact path="/" render={() => <AllPosts />} />
+              <Route exact path="/" render={props =>
+                <AllPosts
+                  {...props}
+                  posts={posts} />} />
               <PrivateRoute
                 path="/create"
                 component={CreateNewPost}
