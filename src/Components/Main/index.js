@@ -38,15 +38,22 @@ class Main extends Component {
     return values;
   }
 
+  onPostCreate = post => {
+    const { posts } = this.state;
+
+    this.setState({
+      posts: [...posts, post]
+    });
+  };
+
   createNewUser = newUser => {
     const { users } = this.state;
     const NewUsersList = [...users, newUser];
 
-    this.setState(
-      {
-        users: NewUsersList,
-        currentUser: newUser
-      });
+    this.setState({
+      users: NewUsersList,
+      currentUser: newUser
+    });
   };
 
   logInClickOpen = () => {
@@ -84,22 +91,24 @@ class Main extends Component {
           />
           <div className={classes.container}>
             <Switch>
-              <Route exact path="/" render={props =>
-                <AllPosts
-                  {...props}
-                  posts={posts} />} />
+              <Route
+                exact
+                path="/"
+                render={props => <AllPosts {...props} posts={posts} />}
+              />
               <PrivateRoute
                 path="/create"
                 component={CreateNewPost}
                 isAuthenticated={isAuthenticated}
                 currentUser={currentUser}
+                onPostCreate={this.onPostCreate}
               />
-              <Route path="/post/:id" render={props => (
-                <SinglePost
-                  {...props}
-                  isAuthenticated={isAuthenticated}
-                />
-              )} />
+              <Route
+                path="/post/:id"
+                render={props => (
+                  <SinglePost {...props} isAuthenticated={isAuthenticated} />
+                )}
+              />
               <Route
                 to="/login"
                 render={props => (
