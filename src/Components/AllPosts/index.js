@@ -9,10 +9,8 @@ import {
   CardActions,
   CardContent,
   Typography,
-  IconButton,
   Button
 } from '@material-ui/core/';
-import FavoriteIcon from '@material-ui/icons/Favorite';
 import { Link } from 'react-router-dom';
 
 class AllPosts extends Component {
@@ -30,8 +28,8 @@ class AllPosts extends Component {
   }
 
   render() {
-    const { classes } = this.props;
-    const posts = AllPosts.readFromLocalStorage();
+    const { classes, posts } = this.props;
+    /*const posts = AllPosts.readFromLocalStorage();*/
 
     return (
       <div className={classes.container}>
