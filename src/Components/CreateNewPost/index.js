@@ -40,7 +40,7 @@ class CreateNewPost extends Component {
       month = '0' + month;
     }
 
-    currentDate = month + '/' + day + '/' + year;
+    currentDate = day + '/' + month + '/' + year;
 
     return currentDate;
   }
