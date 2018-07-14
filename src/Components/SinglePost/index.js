@@ -94,7 +94,7 @@ class SinglePost extends Component {
   };
 
   render() {
-    const { classes, isAuthenticated } = this.props;
+    const { classes, isAuthenticated, currentUser } = this.props;
     const { isEditing, value } = this.state;
 
     return (
@@ -129,15 +129,18 @@ class SinglePost extends Component {
               <FavoriteIcon />
               <span>{this.state.clicked}</span>
             </Button>
-            <Button
-              variant="fab"
-              color="secondary"
-              className={classes.button}
-              onClick={this.onEditOrSaveButtonClick}
-              disabled={!isAuthenticated}
-            >
-              {!isEditing ? (<EditIcon />) : (<SaveIcon />)}
-            </Button>
+            {!((currentUser.username === this.post.authorName) && isAuthenticated) ?
+              ('') : (
+                <Button
+                  variant="fab"
+                  color="secondary"
+                  className={classes.button}
+                  onClick={this.onEditOrSaveButtonClick}
+                >
+                  {!isEditing ? (<EditIcon />) : (<SaveIcon />)}
+                </Button>
+              )}
+
           </CardActions>
           <CommentList comments={this.post.comments} />
           <CreateComment onCommentCreate={this.onCommentCreate} />
