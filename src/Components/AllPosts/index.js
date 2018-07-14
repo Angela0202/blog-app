@@ -14,22 +14,8 @@ import {
 import { Link } from 'react-router-dom';
 
 class AllPosts extends Component {
-  static readFromLocalStorage() {
-    const values = [],
-      keys = Object.keys(localStorage);
-    let i = 0;
-
-    while (i < keys.length) {
-      values.push(JSON.parse(localStorage.getItem(keys[i])));
-      i++;
-    }
-
-    return values;
-  }
-
   render() {
     const { classes, posts } = this.props;
-    /*const posts = AllPosts.readFromLocalStorage();*/
 
     return (
       <div className={classes.container}>
