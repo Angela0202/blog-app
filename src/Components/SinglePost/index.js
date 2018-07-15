@@ -129,7 +129,7 @@ class SinglePost extends Component {
               <FavoriteIcon />
               <span>{this.state.clicked}</span>
             </Button>
-            {!((currentUser.username === this.post.authorName) && isAuthenticated) ?
+            {!((currentUser.userID === this.post.authorID) && isAuthenticated) ?
               ('') : (
                 <Button
                   variant="fab"
