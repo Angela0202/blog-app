@@ -21,7 +21,7 @@ class LogIn extends Component {
     }
   }
 
-  static userID = 0;
+  static userID = localStorage.getItem('users') ? JSON.parse(localStorage.getItem('users')).length : 0;
 
   loginProcess = () => {
     const { username, password } = this.state;
