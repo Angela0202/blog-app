@@ -15,12 +15,12 @@ class Main extends Component {
     super(props);
 
     const posts = JSON.parse(localStorage.getItem('post'));
-    const users = JSON.parse(localStorage.getItem('post'));
+    const users = JSON.parse(localStorage.getItem('users'));
 
     this.state = {
       isAuthenticated: false,
       open: false,
-      users: [] || users,
+      users: users || [],
       currentUser: '',
       posts: posts || []
     };
