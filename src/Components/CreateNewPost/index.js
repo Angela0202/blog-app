@@ -24,7 +24,7 @@ class CreateNewPost extends Component {
     };
   }
 
-  static ID = Object.keys(localStorage).length;
+  static ID =localStorage.getItem('post') ? JSON.parse(localStorage.getItem('post')).length : 0;
 
   getDate() {
     let currentDate = new Date(),
@@ -59,8 +59,7 @@ class CreateNewPost extends Component {
     const { onPostCreate } = this.props;
 
     if (title.trim() !== '' && body.trim() !== '') {
-      const post = { ...this.state.post, postID: ++CreateNewPost.ID };
-      localStorage.setItem(post.postID, JSON.stringify(post));
+      const post = {postID: ++CreateNewPost.ID, ...this.state.post };
 
       this.setState(
         {

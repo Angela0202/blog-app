@@ -14,14 +14,15 @@ class Main extends Component {
   constructor(props) {
     super(props);
 
-    const posts = Main.readFromLocalStorage();
+    const posts = JSON.parse(localStorage.getItem('post'));
+    console.log('ls', posts);
 
     this.state = {
       isAuthenticated: false,
       open: false,
       users: [],
       currentUser: '',
-      posts: [...posts]
+      posts: posts || []
     };
   }
 
@@ -40,10 +41,14 @@ class Main extends Component {
 
   onPostCreate = post => {
     const { posts } = this.state;
+    const newPost = [...posts, post];
+    console.log(newPost);
 
     this.setState({
-      posts: [post, ...posts]
+      posts: newPost
     });
+
+    localStorage.setItem('post', JSON.stringify(newPost));
   };
 
   createNewUser = newUser => {
@@ -102,6 +107,7 @@ class Main extends Component {
                 isAuthenticated={isAuthenticated}
                 currentUser={currentUser}
                 onPostCreate={this.onPostCreate}
+                posts={posts}
               />
               <Route
                 path="/post/:id"
