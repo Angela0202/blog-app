@@ -15,12 +15,12 @@ class Main extends Component {
     super(props);
 
     const posts = JSON.parse(localStorage.getItem('post'));
-    console.log('ls', posts);
+    const users = JSON.parse(localStorage.getItem('post'));
 
     this.state = {
       isAuthenticated: false,
       open: false,
-      users: [],
+      users: [] || users,
       currentUser: '',
       posts: posts || []
     };
@@ -45,6 +45,8 @@ class Main extends Component {
       users: NewUsersList,
       currentUser: newUser
     });
+
+    localStorage.setItem('users', JSON.stringify(NewUsersList));
   };
 
   logInClickOpen = () => {
