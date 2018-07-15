@@ -26,23 +26,9 @@ class Main extends Component {
     };
   }
 
-  static readFromLocalStorage() {
-    const values = [],
-      keys = Object.keys(localStorage);
-    let i = 0;
-
-    while (i < keys.length) {
-      values.push(JSON.parse(localStorage.getItem(keys[i])));
-      i++;
-    }
-
-    return values;
-  }
-
   onPostCreate = post => {
     const { posts } = this.state;
     const newPost = [...posts, post];
-    console.log(newPost);
 
     this.setState({
       posts: newPost
