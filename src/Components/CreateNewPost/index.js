@@ -17,7 +17,8 @@ class CreateNewPost extends Component {
         authorID: this.props.currentUser.userID,
         authorName: this.props.currentUser.username,
         date: this.getDate(),
-        comments: []
+        comments: [],
+        likes: 0
       },
 
       redirect: false
@@ -69,7 +70,8 @@ class CreateNewPost extends Component {
             image: '',
             authorID: this.props.currentUser.userID,
             authorName: this.props.currentUser.username,
-            date: this.getDate()
+            date: this.getDate(),
+            likes: 0
           },
           redirect: true
         });

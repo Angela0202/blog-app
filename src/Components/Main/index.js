@@ -82,6 +82,25 @@ class Main extends Component {
     localStorage.setItem('post', JSON.stringify(editedPosts));
   };
 
+  onPostLike = (post, like) => {
+    const { posts } = this.state;
+
+    const likedPosts = posts.filter(currentElement => {
+      if (currentElement.postID === post.postID) {
+        //Todo change mutability to immutability
+        currentElement.like = like;
+        return [...posts, { ...currentElement }];
+      }
+      return posts;
+    });
+
+    this.setState({
+      posts: likedPosts
+    });
+
+    localStorage.setItem('post', JSON.stringify(likedPosts));
+  };
+
   logInClickOpen = () => {
     this.setState({ open: true });
   };
@@ -141,6 +160,7 @@ class Main extends Component {
                     onCommentCreate={this.onCommentCreate}
                     comments={comments}
                     onPostEdit={this.onPostEdit}
+                    onPostLike={this.onPostLike}
                   />
                 )}
               />

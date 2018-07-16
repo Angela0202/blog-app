@@ -48,9 +48,11 @@ class SinglePost extends Component {
   }
 
   onClick = () => {
+    const { onPostLike } = this.props;
+
     this.setState(prevState => ({
       clicked: prevState.clicked + 1
-    }));
+    }), () => onPostLike(this.post, this.state.clicked));
   };
 
   onEditButtonClick = () => {
@@ -110,7 +112,7 @@ class SinglePost extends Component {
           <CardActions className={classes.actions} disableActionSpacing>
             <Button aria-label="Add to favorites" onClick={this.onClick}>
               <FavoriteIcon />
-              <span>{this.state.clicked}</span>
+              <span>{this.post.like}</span>
             </Button>
             {!((currentUser.userID === this.post.authorID) && isAuthenticated) ?
               ('') : (
