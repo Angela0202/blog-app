@@ -26,7 +26,7 @@ class SinglePost extends Component {
     this.post = SinglePost.findPostById(posts);
 
     this.state = {
-      clicked: 0,
+      clicked: this.post.likes,
       isEditing: false,
       value: this.post.body
     }
@@ -53,26 +53,22 @@ class SinglePost extends Component {
     }));
   };
 
-  onEditOrSaveButtonClick = (e) => {
-    console.log(e.target);
-    const { isEditing } = this.state;
-    !isEditing ?
-      this.setState({
-        isEditing: true
-      })
-      :
-      this.setState({
-        isEditing: false,
-        value: this.state.value
-      }, () => {
-        this.post.body = this.state.value;
-
-        localStorage.setItem(
-          this.post.postID,
-          JSON.stringify({ ...this.post })
-        );
-      });
+  onEditButtonClick = () => {
+    this.setState({
+      isEditing: true
+    })
   };
+
+  onSaveButtonClick = () => {
+    const { onPostEdit } = this.props;
+
+    this.setState({
+      isEditing: false,
+      value: this.state.value
+    });
+    onPostEdit(this.post, this.state.value);
+  };
+
 
   onChange = (e) => {
     this.setState({
@@ -122,7 +118,7 @@ class SinglePost extends Component {
                   variant="fab"
                   color="secondary"
                   className={classes.button}
-                  onClick={this.onEditOrSaveButtonClick}
+                  onClick={!isEditing ? this.onEditButtonClick : this.onSaveButtonClick}
                 >
                   {!isEditing ? (<EditIcon />) : (<SaveIcon />)}
                 </Button>

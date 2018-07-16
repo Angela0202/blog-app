@@ -63,6 +63,25 @@ class Main extends Component {
     localStorage.setItem('comments', JSON.stringify(newComments));
   };
 
+  onPostEdit = (post, body) => {
+    const { posts } = this.state;
+
+    const editedPosts = posts.filter(currentElement => {
+      if (currentElement.postID === post.postID) {
+        //Todo change mutability to immutability
+        currentElement.body = body;
+        return [...posts, { ...currentElement }];
+      }
+      return posts;
+    });
+
+    this.setState({
+      posts: editedPosts
+    });
+
+    localStorage.setItem('post', JSON.stringify(editedPosts));
+  };
+
   logInClickOpen = () => {
     this.setState({ open: true });
   };
@@ -121,6 +140,7 @@ class Main extends Component {
                     currentUser={currentUser}
                     onCommentCreate={this.onCommentCreate}
                     comments={comments}
+                    onPostEdit={this.onPostEdit}
                   />
                 )}
               />
