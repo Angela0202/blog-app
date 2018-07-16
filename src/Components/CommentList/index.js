@@ -33,6 +33,7 @@ class CommentList extends Component {
                   <List>
                     <ListItem>
                       <ListItemText primary={comment.commentBody} />
+                      <span><em>-{comment.commenter}</em></span>
                     </ListItem>
                   </List>
                 </div>

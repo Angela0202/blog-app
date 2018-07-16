@@ -15,7 +15,8 @@ class CreateComment extends Component {
       comment: '',
       title: '',
       userID: currentUser.userID,
-      postID: post.postID
+      postID: post.postID,
+      commenter: currentUser.username
     };
   }
 
@@ -40,7 +41,8 @@ class CreateComment extends Component {
         commentBody: trimmedValue,
         commentTitle: title,
         userID: currentUser.userID,
-        postID: post.postID
+        postID: post.postID,
+        commenter: currentUser.username
       });
     }
   };
