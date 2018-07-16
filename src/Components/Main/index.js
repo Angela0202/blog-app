@@ -16,13 +16,15 @@ class Main extends Component {
 
     const posts = JSON.parse(localStorage.getItem('post'));
     const users = JSON.parse(localStorage.getItem('users'));
+    const comments = JSON.parse(localStorage.getItem('comments'));
 
     this.state = {
       isAuthenticated: false,
       open: false,
       users: users || [],
       currentUser: '',
-      posts: posts || []
+      posts: posts || [],
+      comments: comments || []
     };
   }
 
@@ -49,6 +51,18 @@ class Main extends Component {
     localStorage.setItem('users', JSON.stringify(NewUsersList));
   };
 
+  onCommentCreate = comment => {
+    console.log(comment);
+    const { comments } = this.state;
+    const newComments = [...comments, comment];
+
+    this.setState({
+      comments: newComments
+    });
+
+    localStorage.setItem('comments', JSON.stringify(newComments));
+  };
+
   logInClickOpen = () => {
     this.setState({ open: true });
   };
@@ -72,7 +86,7 @@ class Main extends Component {
 
   render() {
     const { classes } = this.props;
-    const { isAuthenticated, open, currentUser, posts } = this.state;
+    const { isAuthenticated, open, currentUser, posts, comments } = this.state;
 
     return (
       <Router>
@@ -105,6 +119,8 @@ class Main extends Component {
                     isAuthenticated={isAuthenticated}
                     posts={posts}
                     currentUser={currentUser}
+                    onCommentCreate={this.onCommentCreate}
+                    comments={comments}
                   />
                 )}
               />

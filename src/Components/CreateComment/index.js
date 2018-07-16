@@ -9,9 +9,13 @@ class CreateComment extends Component {
   constructor(props) {
     super(props);
 
+    const { currentUser, post } = this.props;
+
     this.state = {
       comment: '',
-      title: ''
+      title: '',
+      userID: currentUser.userID,
+      postID: post.postID
     };
   }
 
@@ -23,15 +27,21 @@ class CreateComment extends Component {
 
   onClick = () => {
     const { comment, title } = this.state;
-    const { onCommentCreate } = this.props;
+    const { onCommentCreate, currentUser, post } = this.props;
     const trimmedValue = comment.trim();
 
     if (trimmedValue !== '') {
       this.setState({
         comment: '',
         title: ''
-      }, () => console.log(this.state.comment));
-      onCommentCreate({ commentBody: trimmedValue, commentTitle: title });
+      });
+
+      onCommentCreate({
+        commentBody: trimmedValue,
+        commentTitle: title,
+        userID: currentUser.userID,
+        postID: post.postID
+      });
     }
   };
 

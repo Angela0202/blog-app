@@ -27,7 +27,6 @@ class SinglePost extends Component {
 
     this.state = {
       clicked: 0,
-      comments: [],
       isEditing: false,
       value: this.post.body
     }
@@ -35,22 +34,10 @@ class SinglePost extends Component {
 
   static findPostById = (posts) => posts.filter(post => post.postID === +SinglePost.getSinglePostID())[0];
 
-  onCommentCreate = comment => {
-    const { comments } = this.state;
+  CommentCreate = comment => {
+    const { onCommentCreate } = this.props;
 
-    this.setState({
-      comments: [{ ...comment }, ...comments]
-    });
-
-    this.post.comments = this.post.comments.concat([
-      comment,
-      ...comments
-    ]);
-
-    localStorage.setItem(
-      this.post.postID,
-      JSON.stringify({ ...this.post })
-    );
+    onCommentCreate(comment);
   };
 
   static getSinglePostID() {
@@ -94,7 +81,7 @@ class SinglePost extends Component {
   };
 
   render() {
-    const { classes, isAuthenticated, currentUser } = this.props;
+    const { classes, isAuthenticated, currentUser, comments } = this.props;
     const { isEditing, value } = this.state;
 
     return (
@@ -142,8 +129,15 @@ class SinglePost extends Component {
               )}
 
           </CardActions>
-          <CommentList comments={this.post.comments} />
-          <CreateComment onCommentCreate={this.onCommentCreate} />
+          <CommentList
+            comments={comments}
+            postID={this.post.postID}
+          />
+          <CreateComment
+            onCommentCreate={this.CommentCreate}
+            currentUser={currentUser}
+            post={this.post}
+          />
         </Card>
       </div>
     );
