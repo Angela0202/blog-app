@@ -5,7 +5,21 @@ export default {
     flexDirection: 'column'
   },
 
-  grid: {
+  list: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-end',
     borderBottom: '1px solid'
+
+  },
+
+  listItem: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+  },
+
+  listItemText: {
+    wordBreak: 'break-all'
   }
 }
