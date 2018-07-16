@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 
 import styles from './styles';
 import { withStyles } from '@material-ui/core/styles';
@@ -24,13 +24,14 @@ class CommentList extends Component {
                 comment.postID === postID ? (
                   <div className={classes.list} key={index}>
                     <ListItem className={classes.listItem}>
-                      <Typography variant="title">
+                      <Typography variant="title" style={{fontSize: '20px'}}>
                         {comment.commentTitle}
                       </Typography>
                       <ListItemText
                         className={classes.listItemText}
-                        primary={comment.commentBody}
-                      />
+                      >
+                        <span style={{fontSize: '18px'}}><em>{comment.commentBody}</em></span>
+                      </ListItemText>
                     </ListItem>
                     <span style={{ fontSize: '16px' }}>
                       <em>

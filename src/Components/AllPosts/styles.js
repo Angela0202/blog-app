@@ -20,7 +20,8 @@ export default {
   container: {
     display: 'flex',
     flexWrap: 'wrap',
-    padding: '20px'
+    padding: '20px',
+    minWidth: '90vw'
   },
 
   actions: {

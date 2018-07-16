@@ -5,7 +5,6 @@ import { withStyles } from '@material-ui/core/styles';
 import {
   Card,
   CardHeader,
-  CardMedia,
   CardActions,
   CardContent,
   Typography,
@@ -25,7 +24,6 @@ class AllPosts extends Component {
               title={post.title}
               subheader={`created on ${post.date}`}
             />
-            <CardMedia className={classes.media} image={post.image} />
             <CardContent>
               <Typography component="p" className={classes.postBody}>
                 {post.body.substr(0, 70)}...
