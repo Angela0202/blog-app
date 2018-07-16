@@ -12,14 +12,16 @@ class Navigation extends Component {
     return (
       <AppBar className={classes.color}>
         <Toolbar className={classes.toolbar}>
-          <Typography variant="title" color="inherit">
-            React Blog App
-          </Typography>
+          <Link to="/" className={classes.link}>
+            <Typography variant="title" color="inherit">
+              React Blog App
+            </Typography>
+          </Link>
           <div>
-            <Link to="/">
+            <Link to="/" className={classes.link}>
               <Button className={classes.button}>All Posts</Button>
             </Link>
-            <Link to="/create">
+            <Link to="/create" className={classes.link}>
               <Button
                 className={classes.button}
                 onClick={isAuthenticated ? () => {} : logInClickOpen}
@@ -27,7 +29,7 @@ class Navigation extends Component {
                 Create Post
               </Button>
             </Link>
-            <Link to="/login">
+            <Link to="/login" className={classes.link}>
               {
                 !isAuthenticated ? (
                   <Button
