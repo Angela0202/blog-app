@@ -13,7 +13,7 @@ class CreateNewPost extends Component {
       post: {
         title: '',
         body: '',
-        image: '',
+        image: 'https://images3.alphacoders.com/823/82317.jpg',
         authorID: this.props.currentUser.userID,
         authorName: this.props.currentUser.username,
         date: this.getDate(),
@@ -67,7 +67,7 @@ class CreateNewPost extends Component {
           post: {
             title: '',
             body: '',
-            image: '',
+            image: 'https://images3.alphacoders.com/823/82317.jpg',
             authorID: this.props.currentUser.userID,
             authorName: this.props.currentUser.username,
             date: this.getDate(),
@@ -110,7 +110,7 @@ class CreateNewPost extends Component {
             id="name"
             label="Featured Image URL"
             className={classes.textField}
-            value={image}
+            placeholder={image}
             onChange={this.onChange('image')}
             margin="normal"
           />

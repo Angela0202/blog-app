@@ -91,7 +91,7 @@ class SinglePost extends Component {
               this.post.date
             }`}
           />
-          <CardMedia className={classes.media} image={this.post.image ? (this.post.image) : ('https://images3.alphacoders.com/823/82317.jpg')} />
+          <CardMedia className={classes.media} image={this.post.image} />
           <CardContent>
             {!isEditing ? (
               <Typography component="p">{value}</Typography>
